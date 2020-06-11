@@ -14,3 +14,15 @@ class File(models.Model):
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE, related_name="profile")
     files=models.ManyToManyField(File)
+"""
+class File(models.Model):
+    name=models.CharField(max_length=256)
+    file=models.FileField(uplaod_to='files/')
+    url=models.FilePathField()
+    user=models.ForeignKey(User)
+    cover=
+    def __str__(self):
+        return self.name
+
+
+"""
