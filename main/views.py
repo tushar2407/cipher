@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView,LogoutView
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 """@login_required
 def upload(request):
     if request.method=='POST':
@@ -38,7 +39,8 @@ class UserLogin(LoginView):
             return HttpResponseRedirect('/main')
         else:
             return HttpResponse(content="not authorised")
-class UploadFile(CreateView):
+class UploadFile(LoginRequiredMixin,CreateView):
+    login_url='/main/login'
     template_name='main/upload.html'
     form_class=FileForm
     success_url='/main'

@@ -22,6 +22,9 @@ class File(models.Model):
         return self.name
     """def __init__(self, *args, **kwargs):
         self.user=user"""
+    def delete(self,*args,**kwargs):
+        self.file.delete()
+        super().delete(*args,**kwargs)
 
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE, related_name="profile")
