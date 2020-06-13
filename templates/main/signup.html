@@ -43,11 +43,22 @@
           <h5 class="card-title" style="text-align: center;">Sign Up</h5>
           <form method="POST">
             {% csrf_token %}
-            {{form.as_p}}
+            <!--{{form.as_p}}-->
+            {% for field in form %}
+            <p>{{field.label_tag}}
+              <br>{{field}}
+              {% if field.help_text %}
+              <small style="color:grey">{{field.help_text}}</small>
+              {% endif %}
+              {% for error in field.errors %}
+              <p style="color:red">{{error}}</p>
+              {% endfor %}
+            </p>
+            {% endfor %}
             <button type="submit"class="btn btn-primary">Signup</button>
         </form>
         {% if errors %}
-        <p>{{errors}}</p>
+        <p style="color:red">{{errors}}</p>
         {% endif %}
           <!--<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>

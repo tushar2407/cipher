@@ -59,6 +59,6 @@ def signup(request):
             return render(request,'main/signup.html',context)
     form=UserCreationForm()
     context['form']=form
-    if request.user.is_authenticated:
-        return redirect('/main')
+    """if request.user.is_authenticated:
+        return redirect('/main')"""
     return render(request, 'main/signup.html',context)
