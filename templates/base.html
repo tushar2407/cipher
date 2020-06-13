@@ -29,9 +29,6 @@
         border-bottom-right-radius: 5px;
         box-shadow: 5px 5px rgba(0,0,0,0.1);
     }
-    :root{
-            --blue:blue;
-        }
         div.card{
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
@@ -39,14 +36,13 @@
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
         footer{
-          width:100vw;
-          top:100%;
-          position: absolute;
           text-align: center;
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
-          /*background-color: #005ce6; */
-          background-color: rgba(0, 92, 230, 1);
+          width:100vw;
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+          border-bottom-left-radius: 5px;;
+          border-bottom-right-radius: 5px;
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
         @media all and (min-width:991px) {  
           .dropdown:after{
@@ -93,6 +89,7 @@
                 <ul class="dropdown-menu">
                   {% if not user.is_authenticated%}
                 <li><a class="dropdown-item" href="/main/login/"> Login</a></li>
+                <li><a class="dropdown-item" href="/main/register/"> Signup</a></li>
                   {% else %}
                 <li><a class="dropdown-item" href="#"> {{user.username}} </a></li>
                 <li><a class="dropdown-item" href="#"> Logout</a></li>
@@ -107,7 +104,7 @@
       {% block content%}
 
       {% endblock%}
-      <footer class="page-footer font-small ">
+      <footer class="page-footer font-small navbar-dark bg-primary fixed-bottom ">
         <div class="footer-copyright text-center py-3 text-white-50">&copy; 2020 Copyright:
           <a href="#" style="color: aliceblue;" > Tushar Mohan</a>
         </div>      

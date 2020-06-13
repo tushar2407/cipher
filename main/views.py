@@ -12,24 +12,15 @@ from django.contrib.auth.views import LoginView,LogoutView
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
-"""@login_required
-def upload(request):
-    if request.method=='POST':
-        #if request.user.is_authenticated:
-        form=FileForm(request.POST,request.FILES)
-        #fs=FileSystemStorage()
-        if form.is_valid:
-            form.save()
-            return redirect('/main')
-    else :
-        form=FileForm()
-        #print(form.as_p)
-    return render(request,'main/upload.html',{'form':form})"""
+from django.contrib.auth.forms import UserCreationForm
 def home(request):
     #print(File.objects.all())
     return render(request, 'main/home.html',{'files':File.objects.filter(user=request.user)})
 class UserLogin(LoginView):
     template_name="main/login.html"
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('/main')
     def post(self, request):
         username=request.POST['username']
         password=request.POST['password']
@@ -52,3 +43,22 @@ class UploadFile(LoginRequiredMixin,CreateView):
         if not fs.exists(form.instance.name):
             fs.save(form.instance.name, form.instance.file)
         return super().form_save(form)        """
+def signup(request):
+    context={}
+    if request.method=='POST':
+        form=UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user=authenticate(request,username=request.POST['username'],password=request.POST['password1'])
+            login(request,user)
+            return redirect('/main')
+        else:
+            print(form.errors)
+            context['errors']=form.errors
+            context['form']=UserCreationForm()
+            return render(request,'main/signup.html',context)
+    form=UserCreationForm()
+    context['form']=form
+    if request.user.is_authenticated:
+        return redirect('/main')
+    return render(request, 'main/signup.html',context)
