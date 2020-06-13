@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import  FileForm
+from .forms import  FileForm, SignUpForm
 from .models import Profile, File
 from django.core.files.storage import FileSystemStorage
 from django.urls import reverse_lazy
@@ -13,8 +13,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
+@login_required
 def home(request):
-    #print(File.objects.all())
     return render(request, 'main/home.html',{'files':File.objects.filter(user=request.user)})
 class UserLogin(LoginView):
     template_name="main/login.html"
@@ -46,18 +46,17 @@ class UploadFile(LoginRequiredMixin,CreateView):
 def signup(request):
     context={}
     if request.method=='POST':
-        form=UserCreationForm(request.POST)
+        form=SignUpForm(request.POST)
         if form.is_valid():
             form.save()
             user=authenticate(request,username=request.POST['username'],password=request.POST['password1'])
             login(request,user)
             return redirect('/main')
         else:
-            print(form.errors)
             context['errors']=form.errors
-            context['form']=UserCreationForm()
+            context['form']=SignUpForm()
             return render(request,'main/signup.html',context)
-    form=UserCreationForm()
+    form=SignUpForm()
     context['form']=form
     """if request.user.is_authenticated:
         return redirect('/main')"""
