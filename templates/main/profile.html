@@ -1,0 +1,44 @@
+{%  extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container" style="margin-bottom: 25vh;">
+    <div style="width: 100%; height: 75vh; background-color: rgba(0,0,0,0.5);">
+    <img src='{% static "profile_pic.png" %}' height="100%" width="100%">
+    </div>
+    <div class="row">
+        <div style=" min-width: fit-content;" class="col col-lg-4 col-md-2 round-b">
+            <h1>User Name</h1>
+        </div>
+        <div class="col col-lg-8 col-md-3 round-b" style="min-width:initial; text-align: center;">
+            <h1>{{user.username}}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col round-b col-lg-8">
+           <h3> DOB</h3> 
+        </div>
+        <div class="col round-b col-lg-4">
+            <h3> {{birthDate}}</h3> 
+        </div>
+    </div>
+    <div class="row">
+        <div style=" min-width: fit-content;" class="col col-lg-4 col-md-2 round-b">
+            <h1>Bio</h1>
+        </div>
+        <div class="col col-lg-8 col-md-3 round-b" style="min-width:initial;">
+            {% if profile.bio %}
+            <p >{{profile.bio}}</p>
+            {% else %}
+            <p class="text-muted"> &lt;No Bio&gt; </p>
+            {% endif%}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col round-b col-lg-8">
+        </div>
+        <div class="col round-b col-lg-4">
+
+        </div>
+    </div>
+</div>
+{% endblock%}

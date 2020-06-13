@@ -48,7 +48,7 @@
             <p>{{field.label_tag}}
               <br>{{field}}
               {% if field.help_text %}
-              <small style="color:grey">{{field.help_text}}</small>
+              <small style="color:grey;">{{field.help_text}}</small>
               {% endif %}
               {% for error in field.errors %}
               <p style="color:red">{{error}}</p>
@@ -68,7 +68,7 @@
       </div>
       </div>
       
-      <footer class="page-footer font-small  navbar-dark bg-primary fixed-bottom">
+      <footer class="page-footer font-small  navbar-dark bg-primary fixed-bottom" style="opacity:0.8">
         <div class="footer-copyright text-center py-3 text-white-50">&copy; 2020 Copyright:
           <a href="#" style="color: aliceblue;" > Tushar Mohan</a>
           
