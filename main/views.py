@@ -34,7 +34,7 @@ class UploadFile(LoginRequiredMixin,CreateView):
     login_url='/main/login'
     template_name='main/upload.html'
     form_class=FileForm
-    success_url='/main'
+    success_url=reverse_lazy('/main')
     def form_valid(self,form):
         form.instance.user=self.request.user
         return super().form_valid(form)
