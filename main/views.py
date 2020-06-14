@@ -15,9 +15,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from services.encrypt import encrypt
 from services.decrypt import decrypt
-@login_required
+from django.contrib.auth import logout
+#@login_required
 def home(request):
-    return render(request, 'main/home.html',{'files':File.objects.filter(user=request.user)})
+    return render(request, 'main/home.html')
 class UserLogin(LoginView):
     template_name="main/login.html"
     """def get(self, request):
@@ -107,3 +108,6 @@ class Decrypt(TemplateView):
                 "decrypted_content":decrypted_content
             }
             return render(request, self.template_name,context)
+def logout_view(request):
+    logout(request)
+    return redirect('encrypt')

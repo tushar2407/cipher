@@ -33,8 +33,16 @@
 <body>
     
     <div style="margin-bottom: 5vh;">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="display: flex; justify-content: center;">
+    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: rgba(0,0,0,1);">
         <a class="navbar-brand" href="#">Cipher</a>
+        <ul class="navbar-nav navbar-right" style="align-self: flex-end;">
+          {% if not user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}"> Sign Up</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+          {% else %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+          {% endif %}
+        </ul>
       </nav>
     </div>
       <div style="display: flex; justify-content: center; margin-bottom:5vh; padding-bottom: 10vh;">
@@ -68,9 +76,9 @@
       </div>
       </div>
       
-      <footer class="page-footer font-small  navbar-dark bg-primary fixed-bottom" style="opacity:0.8">
-        <div class="footer-copyright text-center py-3 text-white-50">&copy; 2020 Copyright:
-          <a href="#" style="color: aliceblue;" > Tushar Mohan</a>
+      <footer class="page-footer font-small  navbar-dark fixed-bottom" style="background-color: rgba(0, 0, 0, 0.19);">
+        <div class="footer-copyright text-center py-3 text-black-80">&copy; 2020 Copyright:
+          <a href="#" style="color: black;" > Tushar Mohan</a>
           
         </div>      
       </footer>

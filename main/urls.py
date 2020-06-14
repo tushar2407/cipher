@@ -7,7 +7,8 @@ from .views import  (
     delete,
     profile,
     Encrypt,
-    Decrypt
+    Decrypt,
+    logout_view
 )
 
 urlpatterns=[
@@ -20,4 +21,5 @@ urlpatterns=[
     path('profile/', profile, name="profile"),
     path('encrypt/', Encrypt.as_view(), name="encrypt"),
     path('decrypt/', Decrypt.as_view(), name="decrypt"),
+    path('logout/',logout_view, name="logout"),
 ]

@@ -4,7 +4,6 @@
 <style>
     #label{
         font-size: large;
-        
     }
     div.col:hover{
         background-color: rgba(0,0,0,0.15);
@@ -12,11 +11,14 @@
     img:hover{
         transform: translate(-5px,-5px);
     }
+    .background{
+        background-color: black;
+        color:white;
+    }
 </style>
-<div class="container" style="margin-bottom: 25vh;">
-    <div style="width: 100%; height: 75vh; background-color: rgba(0,0,0,0.5);">
-    <img class=" round-b"src='{% static "profile_pic.png" %}' height="100%" width="100%">
-    </div>
+<div class="background ">
+<div class="container" style="padding-bottom: 25vh; background-color: rgba(0,0,0,0.15); padding-top: 5vh; padding-bottom: 5vh;">
+    <h1 style="text-align: center;">Profile</h1>
     <div class="row">
         <div style=" min-width: fit-content;" class="col col-lg-4 col-md-2 round-b">
             <h1>User Name</h1>
@@ -88,18 +90,12 @@
         li:hover{
             background-color: #ccc;            
         }
+        .table{
+            color: white !important; 
+        }
     </style>
     <div class="container" style="margin-top: 5vh; margin-bottom: 25vh;">
-        <!--<h1 style="text-align: center;">
-            Welcome home  {{request.user.username}}...!!!
-        </h1>
-        <ul>
-            {% for file in files%}
-            <li>    
-            <a href="{{file.file.url}}">{{file.name}} \ {{file.file.url}}</a>
-            </li>
-            {% endfor %}
-        </ul>-->
+        <h1 style="text-align: center;"> Uploaded Files</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -132,7 +128,13 @@
             </tbody>
         </table>
     </div>
-
-    
 </div>
+</div>
+<script>
+    $('nav ul:nth-child(1) li:nth-child(1)').removeClass('active');
+    $('nav ul:nth-child(1) li:nth-child(5)').addClass('active');
+    $('nav ul:nth-child(1) li:nth-child(3)').removeClass('active');
+    $('nav ul:nth-child(1) li:nth-child(4)').removeClass('active');
+    $('nav ul:nth-child(1) li:nth-child(2)').removeClass('active');
+</script>
 {% endblock%}

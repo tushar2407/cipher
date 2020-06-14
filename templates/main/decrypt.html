@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-<h1 style="text-align: center;"> Cipher your data here :</h1>
 <form method='POST'>
     {% csrf_token %}
     <div class="card my-4">
@@ -25,4 +24,20 @@
     </div>
 </div>
 </div>
+{% if not user.is_authenticated %}
+<script>
+    $('nav ul:nth-child(1) li:nth-child(1)').removeClass('active');
+    $('nav ul:nth-child(1) li:nth-child(3)').addClass('active');
+    $('nav ul:nth-child(1) li:nth-child(2)').removeClass('active');
+</script>
+{% else %}
+<script>
+    $('nav ul:nth-child(1) li:nth-child(1)').removeClass('active');
+    $('nav ul:nth-child(1) li:nth-child(4)').addClass('active');
+    $('nav ul:nth-child(1) li:nth-child(2)').removeClass('active');
+    $('nav ul:nth-child(1) li:nth-child(3)').removeClass('active');
+    $('nav ul:nth-child(1) li:nth-child(5)').removeClass('active');
+</script>
+{% endif %}
+
 {% endblock %}
