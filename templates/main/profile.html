@@ -1,9 +1,21 @@
 {%  extends 'base.html' %}
 {% load static %}
 {% block content %}
+<style>
+    #label{
+        font-size: large;
+        
+    }
+    div.col:hover{
+        background-color: rgba(0,0,0,0.15);
+    }
+    img:hover{
+        transform: translate(-5px,-5px);
+    }
+</style>
 <div class="container" style="margin-bottom: 25vh;">
     <div style="width: 100%; height: 75vh; background-color: rgba(0,0,0,0.5);">
-    <img src='{% static "profile_pic.png" %}' height="100%" width="100%">
+    <img class=" round-b"src='{% static "profile_pic.png" %}' height="100%" width="100%">
     </div>
     <div class="row">
         <div style=" min-width: fit-content;" class="col col-lg-4 col-md-2 round-b">
@@ -11,6 +23,30 @@
         </div>
         <div class="col col-lg-8 col-md-3 round-b" style="min-width:initial; text-align: center;">
             <h1>{{user.username}}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col round-b col-lg-8">
+            <h3>First Name</h3>
+        </div>
+        <div class="col round-b col-lg-4">
+            {% if not profile.first_name %}
+                <h3>-</h3>
+            {% else %}
+                <h3>{{profile.first_name}}</h3>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col round-b col-lg-4">
+            <h3>Last Name</h3>
+        </div>
+        <div class="col round-b col-lg-8" style="min-width:inital ;">
+            {% if not profile.last_name %}
+                <h3>-</h3>
+            {% else %}
+                <h3>{{profile.last_name}}</h3>
+            {% endif %}
         </div>
     </div>
     <div class="row">
@@ -23,7 +59,7 @@
     </div>
     <div class="row">
         <div style=" min-width: fit-content;" class="col col-lg-4 col-md-2 round-b">
-            <h1>Bio</h1>
+            <h3>Bio</h3>
         </div>
         <div class="col col-lg-8 col-md-3 round-b" style="min-width:initial;">
             {% if profile.bio %}
@@ -34,11 +70,69 @@
         </div>
     </div>
     <div class="row">
-        <div class="col round-b col-lg-8">
+        <div style=" min-width: fit-content;" class="col col-lg-8 col-md-2 round-b">
+            <h3>Number of files uploaded </h3>
         </div>
-        <div class="col round-b col-lg-4">
-
+        <div class="col col-lg-4 col-md-3 round-b" style="min-width:initial;">
+            <h3>{{fileNo}}</h3>
         </div>
     </div>
+    <style>
+        ul{
+            list-style: none;
+        }
+        li{
+            text-align: center;
+            transition: 0.5s ease-in-out;
+        }
+        li:hover{
+            background-color: #ccc;            
+        }
+    </style>
+    <div class="container" style="margin-top: 5vh; margin-bottom: 25vh;">
+        <!--<h1 style="text-align: center;">
+            Welcome home  {{request.user.username}}...!!!
+        </h1>
+        <ul>
+            {% for file in files%}
+            <li>    
+            <a href="{{file.file.url}}">{{file.name}} \ {{file.file.url}}</a>
+            </li>
+            {% endfor %}
+        </ul>-->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">SNo.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">File</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for file in files %}
+                <tr>
+                    <td>
+                        {{file.id}}
+                    </td>
+                    <td>
+                        {{file.name}}
+                    </td>
+                    <td>
+                        <a href="{{file.file.url}}" class="btn btn-primary">View</a>
+                    </td>
+                    <td>
+                        <form method="POST" action="{% url 'delete' file.pk%}">
+                            {% csrf_token %}
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    
 </div>
 {% endblock%}

@@ -5,7 +5,9 @@ from .views import  (
     UploadFile,
     signup,
     delete,
-    profile
+    profile,
+    Encrypt,
+    Decrypt
 )
 
 urlpatterns=[
@@ -15,5 +17,7 @@ urlpatterns=[
     path('upload/',UploadFile.as_view(),name="uploadFile"),
     path('register/',signup,name="signup"),
     path('delete/<int:pk>/',delete, name='delete'),
-    path('profile/', profile, name="profile")
+    path('profile/', profile, name="profile"),
+    path('encrypt/', Encrypt.as_view(), name="encrypt"),
+    path('decrypt/', Decrypt.as_view(), name="decrypt"),
 ]

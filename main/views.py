@@ -13,6 +13,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
+from services.encrypt import encrypt
+from services.decrypt import decrypt
 @login_required
 def home(request):
     return render(request, 'main/home.html',{'files':File.objects.filter(user=request.user)})
@@ -77,8 +79,31 @@ def delete(request, pk):
 def profile(request):
     context={}
     request.user.refresh_from_db()
-    print(str(request.user.profile.birth_date))
+    #print(str(request.user.profile.birth_date))
     context['files']=File.objects.filter(user=request.user)
+    context['fileNo']=len(File.objects.filter(user=request.user))
     context['profile']=request.user.profile
     context['birthDate']=str(request.user.profile.birth_date)
     return render(request,'main/profile.html', context)
+
+class Encrypt(TemplateView):
+    template_name='main/encrypt.html'
+    def post(self,request):
+        if 'text' in request.POST:
+            content = request.POST['text']
+            encrypted_content=encrypt(content)
+            context={
+                "encrypted_content":encrypted_content
+            }
+            #print(encrypted_content)
+            return render(request, self.template_name,context)
+class Decrypt(TemplateView):
+    template_name='main/decrypt.html'
+    def post(self,request):
+        if 'text' in request.POST:
+            content = request.POST['text']
+            decrypted_content=decrypt(content)
+            context={
+                "decrypted_content":decrypted_content
+            }
+            return render(request, self.template_name,context)

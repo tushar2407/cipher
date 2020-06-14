@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+<h1 style="text-align: center;"> Cipher your data here :</h1>
+<form method='POST'>
+    {% csrf_token %}
+    <div class="card my-4">
+        <div class="card-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Enter data to decipher</label>
+                <input class="form-control" name="text" placeholder="Enter data">
+            </div>
+            <button type="submit" class="btn btn-primary"> Decipher</button>
+        </div>
+    </div>
+</form>
+<div class="card my-4">
+    <div class="card-body">
+        <label for="exampleInputEmail1">Decrypted data</label>
+        <div class="row">
+            <div class="col">
+                <textarea class="form-control">{{decrypted_content}}</textarea>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
