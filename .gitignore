@@ -126,4 +126,4 @@ dmypy.json
 /.build
 
 **/*.pyc
-*-env/
+*-env/"/.build" 
