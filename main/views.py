@@ -13,8 +13,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
-from services.encrypt import encrypt
-from services.decrypt import decrypt
+from services.encrypt import encrypt, encrypt1
+from services.decrypt import decrypt, decrypt1
 from django.contrib.auth import logout
 #@login_required
 def home(request):
@@ -32,20 +32,16 @@ class UserLogin(LoginView):
             login(request,user)
             return HttpResponseRedirect('/main')
         else:
-            return HttpResponse(content="not authorised")
+            return HttpResponseRedirect('/main/login')
 class UploadFile(LoginRequiredMixin,CreateView):
     login_url='/main/login'
     template_name='main/upload.html'
     form_class=FileForm
-    success_url=reverse_lazy('home')
+    success_url=reverse_lazy('profile')
     def form_valid(self,form):
         form.instance.user=self.request.user
+        print(self.request.FILES['file'])
         return super().form_valid(form)
-    """def form_save(self,form):
-        fs=FileSystemStorage()
-        if not fs.exists(form.instance.name):
-            fs.save(form.instance.name, form.instance.file)
-        return super().form_save(form)        """
 def signup(request):
     context={}
     if request.method=='POST':
@@ -75,7 +71,7 @@ def signup(request):
     return render(request, 'main/signup.html',context)
 def delete(request, pk):
     File.objects.get(pk=pk).delete()
-    return redirect('/main')
+    return redirect('/main/profile')
 @login_required
 def profile(request):
     context={}
@@ -85,6 +81,12 @@ def profile(request):
     context['fileNo']=len(File.objects.filter(user=request.user))
     context['profile']=request.user.profile
     context['birthDate']=str(request.user.profile.birth_date)
+    for i in context['files']:
+        password=str(hash(i.name))
+        decrypt1(i.file.url,password,'a.pdf')
+        if  not i.encrypted:
+            encrypt1(i.file.url,password,'a.pdf')
+            i.encrypted=True
     return render(request,'main/profile.html', context)
 
 class Encrypt(TemplateView):
@@ -110,4 +112,11 @@ class Decrypt(TemplateView):
             return render(request, self.template_name,context)
 def logout_view(request):
     logout(request)
-    return redirect('encrypt')
+    return redirect('home   ')
+def download(request, pk):
+    file=File.objects.get(pk=pk)
+    password=str(hash(file.name))
+    print("im herer")
+    decrypt1(file.file.url,password,'a.pdf')
+    print("asdasas")
+    return redirect(file.file.url+"/")

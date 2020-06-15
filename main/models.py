@@ -9,6 +9,7 @@ class File(models.Model):
     #url=models.FilePathField()
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     #cover=models.ImageField(default=NULL)
+    encrypted=models.BooleanField(default=False)
     def __str__(self):
         return self.name
     """def __init__(self, *args, **kwargs):

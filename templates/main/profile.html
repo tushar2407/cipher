@@ -8,9 +8,6 @@
     div.col:hover{
         background-color: rgba(0,0,0,0.15);
     }
-    img:hover{
-        transform: translate(-5px,-5px);
-    }
     .background{
         background-color: black;
         color:white;
@@ -99,18 +96,15 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">SNo.</th>
                     <th scope="col">Name</th>
                     <th scope="col">File</th>
                     <th scope="col">Delete</th>
+                    <th scope="col">Download</th>
                 </tr>
             </thead>
             <tbody>
                 {% for file in files %}
                 <tr>
-                    <td>
-                        {{file.id}}
-                    </td>
                     <td>
                         {{file.name}}
                     </td>
@@ -121,6 +115,12 @@
                         <form method="POST" action="{% url 'delete' file.pk%}">
                             {% csrf_token %}
                             <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="POST" action="{% url 'download' file.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Download</button>
                         </form>
                     </td>
                 </tr>

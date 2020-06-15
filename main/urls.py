@@ -8,7 +8,8 @@ from .views import  (
     profile,
     Encrypt,
     Decrypt,
-    logout_view
+    logout_view,
+    download
 )
 
 urlpatterns=[
@@ -22,4 +23,5 @@ urlpatterns=[
     path('encrypt/', Encrypt.as_view(), name="encrypt"),
     path('decrypt/', Decrypt.as_view(), name="decrypt"),
     path('logout/',logout_view, name="logout"),
+    path('download/<int:pk>',download,name="download"),
 ]
