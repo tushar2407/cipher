@@ -112,7 +112,7 @@ class Decrypt(TemplateView):
             return render(request, self.template_name,context)
 def logout_view(request):
     logout(request)
-    return redirect('home   ')
+    return redirect('home')
 def download(request, pk):
     file=File.objects.get(pk=pk)
     password=str(hash(file.name))

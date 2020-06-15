@@ -29,10 +29,10 @@
             <h3>First Name</h3>
         </div>
         <div class="col round-b col-lg-4">
-            {% if not profile.first_name %}
+            {% if not profile.user.first_name %}
                 <h3>-</h3>
             {% else %}
-                <h3>{{profile.first_name}}</h3>
+                <h3>{{profile.user.first_name}}</h3>
             {% endif %}
         </div>
     </div>
@@ -41,10 +41,10 @@
             <h3>Last Name</h3>
         </div>
         <div class="col round-b col-lg-8" style="min-width:inital ;">
-            {% if not profile.last_name %}
+            {% if not profile.user.last_name %}
                 <h3>-</h3>
             {% else %}
-                <h3>{{profile.last_name}}</h3>
+                <h3>{{profile.user.last_name}}</h3>
             {% endif %}
         </div>
     </div>
