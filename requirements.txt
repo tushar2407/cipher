@@ -1,4 +1,4 @@
-asgiref==3.2.7
+asgiref==3.2.3
 boto==2.49.0
 Cactus==3.3.3
 colorama==0.4.3
