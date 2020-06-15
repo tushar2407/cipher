@@ -5,8 +5,7 @@ colorama==0.4.3
 colorlog==4.1.0
 dj-database-url==0.5.0
 Django==1.11.29
-django-crispy-forms==1.9.1
-django-heroku==0.3.1
+django-crispy-forms==1.9.0
 django-markwhat==1.6.2
 gunicorn==20.0.4
 keyring==5.7.1
