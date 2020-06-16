@@ -17,7 +17,7 @@ def encrypt(content):
 def encrypt1(file_in, password, file_out):
         #file_in='C:\\Users\\Tushar\\projects\\django\\cipher\\cipher'+file_in
         #try:
-        file_in=MEDIA_ROOT+file_in
+        file_in=MEDIA_ROOT+file_in.strip('/media/')
         document_in = PdfFileReader(open(file_in, 'rb'))
         document_out = PdfFileWriter()
         document_out.cloneReaderDocumentRoot(document_in)

@@ -16,7 +16,7 @@ def decrypt(content):
     return s
 def decrypt1(file_in, password,file_out):
     #file_in='C:\\Users\\Tushar\\projects\\django\\cipher\\cipher'+file_in
-    file_in=MEDIA_ROOT+file_in
+    file_in=MEDIA_ROOT+file_in.strip('/media/')
     #try:
     document_in = PdfFileReader(open(file_in, 'rb'))
     if document_in.isEncrypted:
