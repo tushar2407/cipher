@@ -3,6 +3,7 @@ from tempfile import TemporaryFile
 import shutil
 import os
 from cipher.settings import MEDIA_ROOT
+import urllib.request
 def encrypt(content):
         a=content
         b=[]
@@ -17,7 +18,8 @@ def encrypt(content):
 def encrypt1(file_in, password, file_out):
         #file_in='C:\\Users\\Tushar\\projects\\django\\cipher\\cipher'+file_in
         #try:
-        file_in=MEDIA_ROOT+file_in.strip('/media/')
+        file_in=MEDIA_ROOT+'/'+file_in.strip('/media/')
+        #file_in='https://dipher.herokuapp.com'+file_in
         document_in = PdfFileReader(open(file_in, 'rb'))
         document_out = PdfFileWriter()
         document_out.cloneReaderDocumentRoot(document_in)
