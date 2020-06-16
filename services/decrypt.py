@@ -2,6 +2,7 @@ from PyPDF2 import PdfFileReader,PdfFileWriter
 from tempfile import TemporaryFile
 import shutil
 import os
+from cipher.settings import BASE_DIR
 def decrypt(content):
         a=content
         b=[]
@@ -15,7 +16,7 @@ def decrypt(content):
         return s
 def decrypt1(file_in, password,file_out):
     #file_in='C:\\Users\\Tushar\\projects\\django\\cipher\\cipher'+file_in
-    file_in='https://dipher.herokuapp.com'+file_in
+    file_in=BASE_DIR+file_in
     document_in = PdfFileReader(open(file_in, 'rb'))
     if document_in.isEncrypted:
         while True:
