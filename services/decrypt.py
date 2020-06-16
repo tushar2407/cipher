@@ -17,18 +17,21 @@ def decrypt(content):
 def decrypt1(file_in, password,file_out):
     #file_in='C:\\Users\\Tushar\\projects\\django\\cipher\\cipher'+file_in
     file_in=MEDIA_ROOT+file_in
-    document_in = PdfFileReader(open(file_in, 'rb'))
-    if document_in.isEncrypted:
-        while True:
-            matched = document_in.decrypt(password)
-            if matched:
-                print("asdasddasd")
-                document_out = PdfFileWriter()
-                document_out.cloneReaderDocumentRoot(document_in)
-                #tmp_file = tools.create_temp_file()
-                document_out.write(open(file_out, 'wb'))
-                shutil.copy(file_out, file_in)
-                os.remove(file_out)
+    try:
+        document_in = PdfFileReader(open(file_in, 'rb'))
+        if document_in.isEncrypted:
+            while True:
+                matched = document_in.decrypt(password)
+                if matched:
+                    print("asdasddasd")
+                    document_out = PdfFileWriter()
+                    document_out.cloneReaderDocumentRoot(document_in)
+                    #tmp_file = tools.create_temp_file()
+                    document_out.write(open(file_out, 'wb'))
+                    shutil.copy(file_out, file_in)
+                    os.remove(file_out)
+                    return True
                 return True
-            return True
-    return False 
+    except:
+        return False 
+    return False
