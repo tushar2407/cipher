@@ -14,7 +14,7 @@ def encrypt(content):
         s=s.join(b)
         return s
 def encrypt1(file_in, password, file_out):
-    file_in='C:\\Users\\Tushar\\projects\\django\\cipher\\cipher'+file_in
+    #file_in='C:\\Users\\Tushar\\projects\\django\\cipher\\cipher'+file_in
     document_in = PdfFileReader(open(file_in, 'rb'))
     document_out = PdfFileWriter()
     document_out.cloneReaderDocumentRoot(document_in)
